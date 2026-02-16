@@ -1,0 +1,17 @@
+# Profil Debug Ubuntu
+os: ubuntu22
+packages:
+  - curl
+  - jq
+  - git
+
+network:
+  defaultDeny: true
+  ingress:
+    - from: ingress-namespace
+      protocol: TCP
+      port: 80
+  egress:
+    - to: kube-dns
+      protocol: UDP
+      port: 53
