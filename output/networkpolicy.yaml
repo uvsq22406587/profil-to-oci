@@ -1,0 +1,54 @@
+# Default Deny Ingress
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+  namespace: debug-ubuntu-ns
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+
+---
+# Allow HTTP from ingress namespace
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-http
+  namespace: debug-ubuntu-ns
+spec:
+  podSelector:
+    matchLabels:
+      app: debug-ubuntu
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 80
+
+---
+# Allow DNS egress
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+  namespace: debug-ubuntu-ns
+spec:
+  podSelector:
+    matchLabels:
+      app: debug-ubuntu
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53

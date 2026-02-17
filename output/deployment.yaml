@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug-ubuntu
+  namespace: debug-ubuntu-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debug-ubuntu
+  template:
+    metadata:
+      labels:
+        app: debug-ubuntu
+    spec:
+      containers:
+        - name: debug-ubuntu
+          image: sofiane/debug-ubuntu:v1
+          ports:
+            - containerPort: 80

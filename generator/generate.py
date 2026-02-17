@@ -40,3 +40,55 @@ with open("output/Dockerfile", "w") as f:
     f.write(dockerfile_content)
 
 print("Dockerfile généré avec succès dans output/")
+
+# ==============================
+# Génération des manifests Kubernetes
+# ==============================
+
+app_name = "debug-ubuntu"
+namespace = "debug-ubuntu-ns"
+image = "sofiane/debug-ubuntu:v1"
+
+# --- Deployment ---
+with open("templates/deployment.yaml.template") as f:
+    deployment_template = Template(f.read())
+
+deployment_yaml = deployment_template.render(
+    app_name=app_name,
+    namespace=namespace,
+    image=image
+)
+
+with open("output/deployment.yaml", "w") as f:
+    f.write(deployment_yaml)
+
+# --- Service ---
+with open("templates/service.yaml.template") as f:
+    service_template = Template(f.read())
+
+service_yaml = service_template.render(
+    app_name=app_name,
+    namespace=namespace
+)
+
+with open("output/service.yaml", "w") as f:
+    f.write(service_yaml)
+
+print("Deployment et Service générés dans output/")
+
+# ==============================
+# Génération NetworkPolicies
+# ==============================
+
+with open("templates/networkpolicy.yaml.template") as f:
+    np_template = Template(f.read())
+
+networkpolicy_yaml = np_template.render(
+    app_name=app_name,
+    namespace=namespace
+)
+
+with open("output/networkpolicy.yaml", "w") as f:
+    f.write(networkpolicy_yaml)
+
+print("NetworkPolicies générées dans output/")
