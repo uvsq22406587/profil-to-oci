@@ -1,6 +1,14 @@
-# Projet Générateur Profil → OCI + Kubernetes + NetworkPolicies
+Projet – Générateur Profil → Image OCI → Kubernetes
+Description
 
-Ce projet automatise :
-- La création d'une image Docker/OCI à partir d'un profil
-- Le déploiement Kubernetes utilisant cette image
-- L'application de NetworkPolicies (L3/L4)
+Ce projet implémente un générateur automatisé qui :
+
+Lit un profil YAML
+
+Génère une image OCI
+
+Publie l’image sur Docker Hub
+
+Génère les manifests Kubernetes
+
+Déploie avec NetworkPolicies L3/L4
