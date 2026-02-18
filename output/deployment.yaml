@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: debug-ubuntu
-          image: sofiane/debug-ubuntu:v1
+          image: sofiane/debug-ubuntu:ubuntu22-debug-v1
           ports:
             - containerPort: 80
