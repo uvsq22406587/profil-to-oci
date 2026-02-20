@@ -17,14 +17,22 @@ L’objectif est de faciliter la création répétable d’environnements conten
 
 profil-to-oci/
 ├─ generate.py # Script principal pour générer Dockerfile et manifests Kubernetes
+
 ├─ profiles/
 │ └─ debug-ubuntu.yaml # Exemple de profil YAML
+
 ├─ templates/
+
 │ ├─ Dockerfile.template # Template Dockerfile
+
 │ ├─ deployment.yaml.template # Template Deployment Kubernetes
+
 │ ├─ service.yaml.template # Template Service Kubernetes
+
 │ └─ networkpolicy.yaml.template# Template NetworkPolicy Kubernetes
+
 ├─ output/ # Généré automatiquement : Dockerfile + manifests
+
 ├─ README.md # Ce fichier
 
 Génération du Dockerfile
